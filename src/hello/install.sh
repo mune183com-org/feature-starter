@@ -27,3 +27,5 @@ echo "\${RED}${GREETING}, \$(whoami)!\${NC}"
 EOF
 
 chmod +x /usr/local/bin/hello
+apt-get update
+apt-get install -y curl
