@@ -17,7 +17,7 @@ jobs:
           pwd
           ls -l
           whoami
-          ls -l /src/base-image
+          ls -l ./src/base-image
       - name: Cache Docker layers
         uses: actions/cache@v4
         with:
