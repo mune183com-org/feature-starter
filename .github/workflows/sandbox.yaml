@@ -41,6 +41,13 @@ jobs:
           cache-to: type=local,dest=/tmp/.buildx-cache
           push: false
 
+      - name: step3
+        id: step4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          docker images
+
       - name: "Install latest devcontainer CLI"
         run: npm install -g @devcontainers/cli
 
