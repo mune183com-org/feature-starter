@@ -1,6 +1,6 @@
 {
     "hello": {
-        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "image": "your-dockerhub-username/your-image-name:latest",
         "features": {
             "hello": {
                 "greeting": "hello"
