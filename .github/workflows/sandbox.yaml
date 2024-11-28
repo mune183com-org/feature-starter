@@ -39,7 +39,8 @@ jobs:
           tags: your-dockerhub-username/your-image-name:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
-          push: true
+          push: false
+          load: true
 
       - name: step3
         id: step4
