@@ -18,6 +18,7 @@ jobs:
           ls -l
           whoami
           ls -l ./src/base-image
+          docker images
       - name: Cache Docker layers
         uses: actions/cache@v4
         with:
@@ -45,6 +46,7 @@ jobs:
         run: |
           docker images | grep "test-base-image"
           docker run --rm test-base-image:with-cert echo "Image is accessible"
+
 
       - name: step3
         id: step3
