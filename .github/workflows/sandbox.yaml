@@ -19,17 +19,17 @@ jobs:
           whoami
           ls -l ./src/base-image
           docker images
-      # - name: Cache Docker layers
-      #   uses: actions/cache@v4
-      #   with:
-      #     path: /tmp/.buildx-cache
-      #     key: ${{ runner.os }}-docker-${{ github.sha }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-docker-
+      - name: Cache Docker layers
+        uses: actions/cache@v4
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-docker-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-docker-
 
       # 3. Docker Buildxのセットアップ
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+      # - name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@v3
 
       # 4. Dockerイメージをビルド
       - name: Build and push Docker image
@@ -38,8 +38,8 @@ jobs:
           context: ./src/base-image
           file: ./src/base-image/Dockerfile
           tags: test-base-image:with-cert
-          # cache-from: type=local,src=/tmp/.buildx-cache
-          # cache-to: type=local,dest=/tmp/.buildx-cache
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
           push: false
           load: true
       - name: Verify image load
