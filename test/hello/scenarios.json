@@ -1,6 +1,6 @@
 {
     "hello": {
-        "image": "your-dockerhub-username/your-image-name:latest",
+        "image": "test-base-image:with-cert",
         "features": {
             "hello": {
                 "greeting": "hello"
