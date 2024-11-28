@@ -8,7 +8,17 @@ jobs:
     continue-on-error: false
     steps:
       - uses: actions/checkout@v4
-
+      - name: step2
+        id: step2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          pwd
+          ls -l
+          whoami
+          ls -l ./src/base-image
+          docker images
       - name: Cache Docker layers
         uses: actions/cache@v4
         with:
@@ -17,23 +27,35 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-docker-
 
+      # 3. Docker Buildxのセットアップ
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      # 4. Dockerイメージをビルド
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
           context: ./src/base-image
           file: ./src/base-image/Dockerfile
           tags: test-base-image:with-cert
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
+          # cache-from: type=local,src=/tmp/.buildx-cache
+          # cache-to: type=local,dest=/tmp/.buildx-cache
           push: false
           load: true
+      - name: Verify image load
+        run: |
+          docker images | grep "test-base-image"
+          docker run --rm test-base-image:with-cert echo "Image is accessible"
+
+
+      - name: step3
+        id: step3
+        run: |
+          docker images
 
       - name: Reset Docker build context
         run: docker buildx use default
-
+        
       - name: "Install latest devcontainer CLI"
         run: npm install -g @devcontainers/cli
 
