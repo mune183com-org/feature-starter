@@ -1,6 +1,6 @@
 {
     "hello": {
-        "image": "localhost/test-base-image:with-cert",
+        "image": "test-base-image:with-cert",
         "features": {
             "hello": {
                 "greeting": "hello"

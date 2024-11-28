@@ -41,7 +41,11 @@ jobs:
           # cache-to: type=local,dest=/tmp/.buildx-cache
           push: false
           load: true
-
+      - name: Verify image load
+        run: |
+          docker images | grep "test-base-image"
+          docker run --rm test-base-image:with-cert echo "Image is accessible"
+          
       - name: step3
         id: step3
         run: |
