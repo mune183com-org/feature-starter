@@ -36,7 +36,7 @@ jobs:
         with:
           context: ./src/base-image
           file: ./src/base-image/Dockerfile
-          tags: localhost/test-base-image:with-cert
+          tags: test-base-image:with-cert
           # cache-from: type=local,src=/tmp/.buildx-cache
           # cache-to: type=local,dest=/tmp/.buildx-cache
           push: false
@@ -45,7 +45,7 @@ jobs:
         run: |
           docker images | grep "test-base-image"
           docker run --rm test-base-image:with-cert echo "Image is accessible"
-          
+
       - name: step3
         id: step3
         run: |
